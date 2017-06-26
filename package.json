@@ -1,0 +1,155 @@
+{
+  "name": "graphql-express",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/cors": "^2.8.1",
+    "@types/graphql": "^0.9.2",
+    "@types/lodash.merge": "^4.6.2",
+    "apollo-client": "^1.5.0",
+    "apollo-client-ws": "^1.0.7",
+    "await-to-ts": "^1.0.6",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "graphql": "^0.10.3",
+    "graphql-server-express": "^0.9.0",
+    "graphql-subscriptions": "^0.4.3",
+    "graphql-tag": "^2.4.2",
+    "graphql-tools": "^1.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jsonwebtoken": "^7.4.0",
+    "lodash.intersection": "^4.4.0",
+    "lodash.merge": "^4.6.0",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.0",
+    "morgan": "^1.8.2",
+    "optics-agent": "^1.1.4",
+    "subscriptions-transport-ws": "^0.7.3",
+    "ts-node": "^3.1.0",
+    "typescript": "^2.3.4",
+    "xlsx-template": "^0.0.7"
+  },
+  "scripts": {
+    "postinstall": "cd app && yarn",
+    "docs": "rimraf docs; graphdoc -s ./schema/schema.gql -o ./docs",
+    "commit": "git-cz",
+    "release": "standard-version",
+    "start": "yarn; concurrently -k \"yarn run docs && ts-node --fast index.ts\" ",
+    "dev": "yarn; yarn run docs; ts-node --inspect index.ts",
+    "debug": "yarn; yarn run build; node --inspect-brk --trace-deprecation dist/index.js",
+    "test:debug": "yarn run pretest; env NODE_ENV=test SECRET=secret MONGO_HOST=localhost MONGO_PORT=37017 MONGO_DB=test node --debug-brk --trace-deprecation node_modules/.bin/jest --watch --runInBand --testRegex '(/__tests__/.*|\\.(test|spec))\\.(js)$' dist; docker stop mongo_test; docker rm mongo_test",
+    "test:debug:inspector": "yarn run pretest; env NODE_ENV=test SECRET=secret MONGO_HOST=localhost MONGO_PORT=37017 MONGO_DB=test node --inspect-brk --trace-deprecation node_modules/.bin/jest --watch --runInBand --testRegex '(/__tests__/.*|\\.(test|spec))\\.(js)$' dist; docker stop mongo_test; docker rm mongo_test",
+    "prebuild": "yarn; rimraf dist; yarn run docs",
+    "build": "tsc -p .; cp schema/schema.gql dist/schema; cp -R docs dist",
+    "db:clean": "yarn run db:stop; yarn run db:destroy; yarn run db:create",
+    "db:seed": "ts-node seed/cli.ts",
+    "db:start": "docker start mongo",
+    "db:stop": "docker stop mongo",
+    "db:destroy": "docker rm mongo",
+    "db:create": "bash ./scripts/db-create.sh",
+    "pretest": "yarn; yarn run build; bash ./scripts/pretest.sh",
+    "test": "env SLEEP_TIME=0 NODE_ENV=test SECRET=secret MONGO_HOST=localhost MONGO_PORT=37017 MONGO_DB=test jest --coverage",
+    "test:html": "yarn run test; xdg-open coverage/lcov-report/index.html",
+    "posttest": "docker stop mongo_test; docker rm mongo_test",
+    "test:watch": "yarn run pretest; env SLEEP_TIME=0 NODE_ENV=test SECRET=secret MONGO_HOST=localhost MONGO_PORT=37017 MONGO_DB=test jest --watch --bail; docker stop mongo_test; docker rm mongo_test",
+    "test:watch:coverage": "yarn run pretest; env SLEEP_TIME=0 NODE_ENV=test SECRET=secret MONGO_HOST=localhost MONGO_PORT=37017 MONGO_DB=test jest --coverage --watch --bail; docker stop mongo_test; docker rm mongo_test",
+    "lint": "tslint -p .",
+    "lint:fix": "tslint --fix -p .",
+    "upgrade": "yarn upgrade-interactive",
+    "validate": "yarn check",
+    "watch": "npm-watch"
+  },
+  "devDependencies": {
+    "@2fd/graphdoc": "^2.3.0",
+    "@playlyfe/gql": "^2.3.1",
+    "@types/bcrypt": "^1.0.0",
+    "@types/body-parser": "^1.16.4",
+    "@types/commander": "^2.9.1",
+    "@types/dotenv": "^4.0.0",
+    "@types/express": "^4.0.36",
+    "@types/faker": "^4.1.0",
+    "@types/jest": "^20.0.2",
+    "@types/jsonwebtoken": "^7.2.1",
+    "@types/mongoose": "^4.7.18",
+    "@types/morgan": "^1.7.32",
+    "@types/node": "^8.0.3",
+    "@types/optics-agent": "^1.1.1",
+    "@types/progress": "^2.0.0",
+    "@types/supertest": "^2.0.1",
+    "commander": "^2.10.0",
+    "commitizen": "^2.9.6",
+    "concurrently": "^3.5.0",
+    "conduct": "^1.0.2",
+    "cz-conventional-changelog": "^2.0.0",
+    "faker": "^4.1.0",
+    "jest": "^20.0.4",
+    "npm-watch": "^0.2.0",
+    "pm2": "^2.5.0",
+    "precommit-hook": "^3.0.0",
+    "progress": "^2.0.0",
+    "rimraf": "^2.6.1",
+    "standard-version": "^4.2.0",
+    "supertest": "^3.0.0",
+    "ts-jest": "^20.0.6",
+    "tslint": "^5.4.3",
+    "yarn": "^0.24.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "pre-commit": [
+    "lint",
+    "validate",
+    "build",
+    "pretest",
+    "test"
+  ],
+  "watch": {
+    "start": {
+      "patterns": [
+        "schema",
+        "server",
+        "tests",
+        "utils"
+      ],
+      "extensions": "ts,js"
+    }
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/app/",
+      "<rootDir>/dist/"
+    ],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/app/"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "testEnvironment": "node",
+    "mapCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
+}

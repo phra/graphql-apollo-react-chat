@@ -1,0 +1,148 @@
+schema {
+  mutation: Mutation
+  query: Query
+  subscription: Subscription
+}
+
+type Query {
+  query(token: String!): QueryResponse
+  success: Int
+  fail: Int
+  channels: ChannelsResponse
+  messages(channel: String!): MessagesResponse
+}
+
+type Mutation {
+  login(email: String!, password: String!): LoginResponse
+  signup(user: Signup!): SignupResponse
+  sendMessage(token: String!, text: String!, channel: String!): GenericResponse
+}
+
+type Subscription {
+  onMessage(channel: String!): Message
+  onChannel: String
+}
+
+type Message {
+  sender: String
+  text: String
+  channel: String
+  created: String
+}
+
+interface IGenericResponse {
+  error: String!
+}
+
+type GenericResponse implements IGenericResponse {
+  error: String!
+}
+
+type ChannelsResponse implements IGenericResponse {
+  error: String!
+  channels: [String]!
+}
+
+type MessagesResponse implements IGenericResponse {
+  error: String!
+  messages: [Message]!
+}
+
+type QueryResponse implements IGenericResponse {
+  error: String!
+  user: User
+}
+
+type SignupResponse implements IGenericResponse {
+  user: User
+  token: String
+  error: String!
+}
+
+type LoginResponse implements IGenericResponse {
+  user: User
+  token: String
+  error: String!
+}
+
+interface UserPlain {
+  _id: ID
+  active: Boolean
+  created: String
+  email: String
+}
+
+input Signup {
+  email: String!
+  password: String!
+}
+
+type User implements UserPlain {
+  _id: ID
+  active: Boolean
+  created: String
+  email: String
+}
+
+input IDInput {
+  _eq: ID
+  _ne: ID
+  _in: [ID]
+  _nin: [ID]
+  _lt: ID
+  _lte: ID
+  _gt: ID
+  _gte: ID
+}
+
+input BooleanInput {
+  _eq: Boolean
+  _ne: Boolean
+  _in: [Boolean]
+  _nin: [Boolean]
+  _lt: Boolean
+  _lte: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _exists: Boolean
+}
+
+input StringInput {
+  _eq: String
+  _ne: String
+  _in: [String]
+  _nin: [String]
+  _lt: String
+  _lte: String
+  _gt: String
+  _gte: String
+  _exists: Boolean
+  _type: String
+  _regex: String
+}
+
+input IntInput {
+  _eq: Int
+  _ne: Int
+  _in: [Int]
+  _nin: [Int]
+  _lt: Int
+  _lte: Int
+  _gt: Int
+  _gte: Int
+  _exists: Boolean
+  _type: String
+}
+
+input FloatInput {
+  _eq: Int
+  _ne: Int
+  _in: [Int]
+  _nin: [Int]
+  _lt: Int
+  _lte: Int
+  _gt: Int
+  _gte: Int
+  _exists: Boolean
+  _type: String
+}

@@ -1,0 +1,36 @@
+ {
+   schema: {
+     files: "schema/**/*.gql"
+   },
+   query: {
+     files: [ /* define file paths which you'd like the gql parser to watch and give autocomplete suggestions for */
+       {
+         match: 'app/src/app/**/*.service.ts',
+         parser: ['EmbeddedQueryParser', { startTag: 'gql`', endTag: '`' }],
+       },{
+         match: 'client/**/*.ts',
+         parser: ['EmbeddedQueryParser', { startTag: 'gql`', endTag: '`' }],
+       },
+       {
+         match: 'client/**/*.ts',
+         parser: ['EmbeddedQueryParser', { startTag: 'Relay\\.QL`', endTag: '`' }],
+         isRelay: true,
+       },
+       {
+         match: 'client/**/*.ts',
+         parser: ['EmbeddedQueryParser', { startTag: 'graphql request\\s+"""', endTag: '"""' }],
+       },
+       {
+         match: 'tests/queries/**/*.ts',
+         parser: ['EmbeddedQueryParser', { startTag: '`', endTag: '`' }],
+       },       {
+         match: 'tests/**/*.ts',
+         parser: ['EmbeddedQueryParser', { startTag: '`#graphql', endTag: '`' }],
+       },
+       {
+         match: 'tests/queries/**/*.gql',
+         parser: 'QueryParser',
+       },
+     ],
+   },
+ }
