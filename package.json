@@ -38,7 +38,7 @@
     "docs": "rimraf docs; graphdoc -s ./schema/schema.gql -o ./docs",
     "commit": "git-cz",
     "release": "standard-version",
-    "start": "yarn; concurrently -k \"yarn run docs && ts-node --fast index.ts\" ",
+    "start": "yarn; concurrently -k \"yarn run docs && ts-node --fast index.ts\" \"cd app && yarn start\"",
     "dev": "yarn; yarn run docs; ts-node --inspect index.ts",
     "debug": "yarn; yarn run build; node --inspect-brk --trace-deprecation dist/index.js",
     "test:debug": "yarn run pretest; env NODE_ENV=test SECRET=secret MONGO_HOST=localhost MONGO_PORT=37017 MONGO_DB=test node --debug-brk --trace-deprecation node_modules/.bin/jest --watch --runInBand --testRegex '(/__tests__/.*|\\.(test|spec))\\.(js)$' dist; docker stop mongo_test; docker rm mongo_test",
