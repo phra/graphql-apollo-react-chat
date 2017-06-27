@@ -45,18 +45,13 @@ export const MessageResolvers = {
       assert.ifError(err)
       const [err1, count] = await to(MessageModel.count({ channel }).exec())
       assert.ifError(err1)
-      const [err2] = await to(new Message({ sender: user.email, channel, text }).save())
+      const [err2, message] = await to(new Message({ sender: user.email, channel, text }).save())
       assert.ifError(err2)
       if (!count) {
         context.PubSub.publish('onChannel', channel)
       }
 
-      context.PubSub.publish('onMessage', {
-        sender: user.email,
-        text,
-        channel,
-      })
-
+      context.PubSub.publish('onMessage', message)
       return { error: '' }
     },
   },
@@ -105,5 +100,5 @@ async function getChannels(context: IContext): Promise<string[]> {
 
 async function getMessages(channel: string, context: IContext): Promise<IMessage[]> {
   const MessageModel = context.Mongoose.model('Message')
-  return MessageModel.find({ channel }).sort('-created').lean().exec() as Promise<IMessage[]>
+  return MessageModel.find({ channel }).sort('created').lean().exec() as Promise<IMessage[]>
 }
