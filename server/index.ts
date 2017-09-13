@@ -25,7 +25,7 @@ const SCHEMA = makeExecutableSchema({
   typeDefs: [schemaFile],
 })
 
-OpticsAgent.instrumentSchema(SCHEMA)
+OpticsAgent.instrumentSchema(SCHEMA as any)
 const PORT = process.env.HTTP_PORT
 const GRAPHQL_ENDPOINT = '/graphql'
 const GRAPHIQL_ENDPOINT = '/graphiql'
@@ -38,9 +38,9 @@ const websocketServer = createServer((request, response) => {
 
 const subscriptionServer = SubscriptionServer.create(
   {
-    schema: SCHEMA,
+    schema: SCHEMA as any,
     execute,
-    subscribe,
+    subscribe: subscribe as any,
   },
   {
     server: websocketServer,

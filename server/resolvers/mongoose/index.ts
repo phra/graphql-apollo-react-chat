@@ -1,6 +1,6 @@
 import * as assert from 'assert'
-import merge = require('lodash.merge')
 import { GraphQLOptions } from 'graphql-server-core'
+import merge = require('lodash.merge')
 import * as mongoose from 'mongoose'
 import { MessageResolvers } from './Message'
 import { UserResolvers } from './User'
@@ -10,7 +10,14 @@ function buildMongoUrl(user: string, password: string, host: string, port: numbe
   return url
 }
 
-const URL = buildMongoUrl(process.env.MONGO_USER, process.env.MONGO_PASSWORD, process.env.MONGO_HOST, process.env.MONGO_PORT, process.env.MONGO_DB);
+const URL = buildMongoUrl(
+  process.env.MONGO_USER as string,
+  process.env.MONGO_PASSWORD as string,
+  process.env.MONGO_HOST as string,
+  parseInt(process.env.MONGO_PORT as string, 10),
+  process.env.MONGO_DB as string,
+);
+
 (mongoose as any).Promise = global.Promise
 /* istanbul ignore next */
 mongoose.connect(URL).catch((err) => {

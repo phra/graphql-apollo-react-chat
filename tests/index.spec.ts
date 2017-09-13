@@ -32,6 +32,7 @@ beforeAll(() => {
 afterAll(async () => {
   Server.close()
   models.close()
+  process.exit(0)
 })
 
 describe('GRAPHQL endpoint', async () => {
