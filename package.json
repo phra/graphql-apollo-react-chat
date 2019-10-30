@@ -25,13 +25,14 @@
     "lodash.intersection": "^4.4.0",
     "lodash.merge": "^4.6.2",
     "moment": "^2.19.3",
-    "mongoose": "^4.11.14",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "optics-agent": "^1.1.6",
     "subscriptions-transport-ws": "^0.8.3",
     "ts-node": "^3.3.0",
     "typescript": "^2.3.4",
-    "xlsx-template": "^0.0.7"
+    "xlsx-template": "^0.0.7",
+    "snyk": "^1.239.5"
   },
   "scripts": {
     "postinstall": "cd app && yarn",
@@ -61,7 +62,9 @@
     "lint:fix": "tslint --fix -p .",
     "upgrade": "yarn upgrade-interactive",
     "validate": "yarn check",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@2fd/graphdoc": "^2.3.0",
@@ -151,5 +154,6 @@
         "lines": 77
       }
     }
-  }
+  },
+  "snyk": true
 }

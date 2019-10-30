@@ -1,0 +1,40 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - bcrypt > node-pre-gyp > tar-pack > debug:
+        patched: '2019-10-30T10:14:10.445Z'
+  'npm:extend:20180424':
+    - bcrypt > node-pre-gyp > request > extend:
+        patched: '2019-10-30T10:14:10.445Z'
+    - optics-agent > request > extend:
+        patched: '2019-10-30T10:14:10.445Z'
+  'npm:hoek:20180212':
+    - optics-agent > request > hawk > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - optics-agent > request > hawk > boom > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - optics-agent > request > hawk > sntp > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - bcrypt > node-pre-gyp > request > hawk > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - optics-agent > request > hawk > cryptiles > boom > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - bcrypt > node-pre-gyp > request > hawk > boom > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - bcrypt > node-pre-gyp > request > hawk > sntp > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+    - bcrypt > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2019-10-30T10:14:10.445Z'
+  'npm:stringstream:20180511':
+    - optics-agent > request > stringstream:
+        patched: '2019-10-30T10:14:10.445Z'
+    - bcrypt > node-pre-gyp > request > stringstream:
+        patched: '2019-10-30T10:14:10.445Z'
+  'npm:tough-cookie:20170905':
+    - optics-agent > request > tough-cookie:
+        patched: '2019-10-30T10:14:10.445Z'
+    - bcrypt > node-pre-gyp > request > tough-cookie:
+        patched: '2019-10-30T10:14:10.445Z'
