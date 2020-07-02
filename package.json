@@ -10,7 +10,7 @@
     "apollo-client": "^1.9.2",
     "apollo-client-ws": "^1.0.16",
     "await-to-ts": "^1.0.6",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
