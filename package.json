@@ -32,7 +32,7 @@
     "ts-node": "^8.0.0",
     "typescript": "^2.3.4",
     "xlsx-template": "^0.0.7",
-    "snyk": "^1.316.1"
+    "snyk": "^1.425.4"
   },
   "scripts": {
     "postinstall": "cd app && yarn",
