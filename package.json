@@ -25,14 +25,14 @@
     "lodash.intersection": "^4.4.0",
     "lodash.merge": "^4.6.2",
     "moment": "^2.19.3",
-    "mongoose": "^5.3.9",
+    "mongoose": "^5.12.2",
     "morgan": "^1.9.1",
     "optics-agent": "^1.1.6",
     "subscriptions-transport-ws": "^0.8.3",
     "ts-node": "^8.0.0",
     "typescript": "^2.3.4",
     "xlsx-template": "^0.0.7",
-    "snyk": "^1.316.1"
+    "snyk": "^1.465.0"
   },
   "scripts": {
     "postinstall": "cd app && yarn",
