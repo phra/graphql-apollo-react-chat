@@ -24,7 +24,7 @@
     "jsonwebtoken": "^8.0.1",
     "lodash.intersection": "^4.4.0",
     "lodash.merge": "^4.6.2",
-    "moment": "^2.19.3",
+    "moment": "^2.29.2",
     "mongoose": "^5.12.3",
     "morgan": "^1.9.1",
     "optics-agent": "^1.1.6",
