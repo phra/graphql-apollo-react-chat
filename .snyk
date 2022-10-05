@@ -1,8 +1,23 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.14.1
+version: v1.25.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   SNYK-JS-LODASH-567746:
     - apollo-client > redux > lodash:
         patched: '2020-05-01T03:44:56.970Z'
+  'npm:hoek:20180212':
+    - optics-agent > request > hawk > hoek:
+        patched: '2022-10-05T18:35:06.763Z'
+    - optics-agent > request > hawk > boom > hoek:
+        patched: '2022-10-05T18:35:06.763Z'
+    - optics-agent > request > hawk > sntp > hoek:
+        patched: '2022-10-05T18:35:06.763Z'
+    - optics-agent > request > hawk > cryptiles > boom > hoek:
+        patched: '2022-10-05T18:35:06.763Z'
+  'npm:stringstream:20180511':
+    - optics-agent > request > stringstream:
+        patched: '2022-10-05T18:35:06.763Z'
+  'npm:tough-cookie:20170905':
+    - optics-agent > request > tough-cookie:
+        patched: '2022-10-05T18:35:06.763Z'
